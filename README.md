@@ -9,7 +9,7 @@ ere are instructions for how to install this locally on the repo:
 1. Clone the repo
 
 ``` bash
-git clone https://github.com/fac29/hoda-e-commerce-backend.git
+git clone https://github.com/fac29/hoda-e-commerce-frontend.git
 ```
 2. Navigate to the repo
 
