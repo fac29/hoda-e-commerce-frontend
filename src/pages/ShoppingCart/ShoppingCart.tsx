@@ -1,4 +1,5 @@
 function ShoppingCart() {
-  return <h1>ShoppingCart</h1>;
+  return <h1>Shopping Cart</h1>;
 }
+
 export default ShoppingCart;
