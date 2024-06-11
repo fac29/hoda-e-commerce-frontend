@@ -4,7 +4,7 @@ This is a repo that holds the frontend functionality for an E-Commerce website c
 
 ## Installation and initialisation
 
-ere are instructions for how to install this locally on the repo:
+Here are instructions for how to install this locally on the repo:
 
 1. Clone the repo
 
