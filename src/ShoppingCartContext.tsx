@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useContext, useState, ReactNode } from "react";
 
 interface CartItem {
   id: number;
@@ -15,21 +15,19 @@ interface CartContextType {
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
-export const useCart = () => {
+export function useCart() {
   const context = useContext(CartContext);
   if (!context) {
     throw new Error("useCart must be used within a CartProvider");
   }
   return context;
-};
+}
 
 interface CartProviderProps {
   children: ReactNode;
 }
 
-export const ShoppingCartProvider: React.FC<CartProviderProps> = ({
-  children,
-}) => {
+export function ShoppingCartProvider({ children }: CartProviderProps) {
   const [cart, setCart] = useState<CartItem[]>([]);
 
   const addToCart = (item: CartItem) => {
@@ -45,4 +43,4 @@ export const ShoppingCartProvider: React.FC<CartProviderProps> = ({
       {children}
     </CartContext.Provider>
   );
-};
+}
