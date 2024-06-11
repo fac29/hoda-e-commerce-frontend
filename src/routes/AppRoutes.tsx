@@ -14,7 +14,7 @@ function AppRoutes() {
       <Route path="/signup" element={<SignUp />} />
       <Route path="/login" element={<Login />} />
       <Route path="/shopping-cart" element={<ShoppingCart />} />
-      <Route path="/product:product" element={<Product />} />
+      <Route path="/product/:product" element={<Product />} />
     </Routes>
   );
 }
