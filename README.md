@@ -11,19 +11,20 @@ ere are instructions for how to install this locally on the repo:
 ``` bash
 git clone https://github.com/fac29/hoda-e-commerce-frontend.git
 ```
+
 2. Navigate to the repo
 
 ``` bash
 cd hoda-e-commerce-frontend
 ```
 
-2. Install NPM packages
+3. Install NPM packages
 
 ``` bash
 npm install
 ```
 
-3. Enter the following script to run the server in the development mode.
+4. Enter the following script to run the server in the development mode.
 
 ```bash
 npm run dev
