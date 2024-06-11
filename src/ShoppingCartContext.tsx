@@ -31,11 +31,40 @@ export function ShoppingCartProvider({ children }: CartProviderProps) {
   const [cart, setCart] = useState<CartItem[]>([]);
 
   const addToCart = (item: CartItem) => {
-    setCart((prevCart) => [...prevCart, item]);
+    const existingItem = cart.find((cartItem) => cartItem.id === item.id);
+
+    if (existingItem) {
+      // If the item is already in the cart, update its quantity
+      setCart((prevCart) =>
+        prevCart.map((cartItem) =>
+          cartItem.id === item.id
+            ? //Only changes quantity of the item with the right id. The other items quantites remain the same
+              { ...cartItem, quantity: cartItem.quantity + 1 }
+            : cartItem
+        )
+      );
+    } else {
+      // If the item is not in the cart, add it
+      setCart((prevCart) => [...prevCart, { ...item, quantity: 1 }]);
+    }
   };
 
   const removeFromCart = (id: number) => {
-    setCart((prevCart) => prevCart.filter((item) => item.id !== id));
+    const existingItem = cart.find((cartItem) => cartItem.id === id);
+
+    if (existingItem && existingItem.quantity > 1) {
+      // If the item exists and its quantity is greater than 1, decrease its quantity by 1
+      setCart((prevCart) =>
+        prevCart.map((cartItem) =>
+          cartItem.id === id
+            ? { ...cartItem, quantity: cartItem.quantity - 1 }
+            : cartItem
+        )
+      );
+    } else {
+      // If the item does not exist or its quantity is 1, remove it from the cart
+      setCart((prevCart) => prevCart.filter((item) => item.id !== id));
+    }
   };
 
   return (
