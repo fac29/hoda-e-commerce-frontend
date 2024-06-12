@@ -29,6 +29,10 @@ function ShoppingCart() {
     }
   }
 
+  function goToCheckout() {
+    navigate("/checkout");
+  }
+
   return (
     <div>
       <h2>Cart Items</h2>
@@ -49,6 +53,7 @@ function ShoppingCart() {
         )}
       </ul>
       {cart.length ? <p>Total:£{total}</p> : null}
+      {cart.length ? <button onClick={goToCheckout}>Checkout</button> : null}
     </div>
   );
 }
