@@ -7,7 +7,7 @@ import { useCart } from "../../ShoppingCartContext";
 function ShoppingCart() {
   const navigate = useNavigate();
 
-  const { cart } = useCart();
+  const { cart, total } = useCart();
 
   function handleBack() {
     navigate("/");
@@ -36,13 +36,15 @@ function ShoppingCart() {
       <ul>
         {cart.map((item) => (
           <li key={item.id}>
-            {item.name} - £{item.price}
+            <p>{item.name}</p>
             <button onClick={() => handleRemoveFromCart(item.id)}>-</button>
             <p>{item.quantity}</p>
             <button onClick={() => handleAddToCart(item.id)}>+</button>
+            <p>£{item.price * item.quantity}</p>
           </li>
         ))}
       </ul>
+      <p>Total:£{total}</p>
     </div>
   );
 }
