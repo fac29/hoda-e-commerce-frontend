@@ -11,6 +11,7 @@ interface CartContextType {
   cart: CartItem[];
   addToCart: (item: CartItem) => void;
   removeFromCart: (id: number) => void;
+  changeCartAmount: (item: CartItem) => void;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -49,6 +50,22 @@ export function ShoppingCartProvider({ children }: CartProviderProps) {
     }
   };
 
+  const changeCartAmount = (item: CartItem) => {
+    const existingItem = cart.find((cartItem) => cartItem.id === item.id);
+    const { quantity } = item;
+    if (existingItem) {
+      // If the item is already in the cart, update its quantity
+      setCart((prevCart) =>
+        prevCart.map((cartItem) =>
+          cartItem.id === item.id
+            ? //Only changes quantity of the item with the right id. The other items quantites remain the same
+              { ...cartItem, quantity: quantity }
+            : cartItem
+        )
+      );
+    }
+  };
+
   const removeFromCart = (id: number) => {
     const existingItem = cart.find((cartItem) => cartItem.id === id);
 
@@ -68,7 +85,9 @@ export function ShoppingCartProvider({ children }: CartProviderProps) {
   };
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart }}>
+    <CartContext.Provider
+      value={{ cart, addToCart, removeFromCart, changeCartAmount }}
+    >
       {children}
     </CartContext.Provider>
   );
