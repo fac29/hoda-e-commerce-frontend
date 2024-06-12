@@ -34,17 +34,21 @@ function ShoppingCart() {
       <h2>Cart Items</h2>
       <button onClick={handleBack}>Back to Products</button>
       <ul>
-        {cart.map((item) => (
-          <li key={item.id}>
-            <p>{item.name}</p>
-            <button onClick={() => handleRemoveFromCart(item.id)}>-</button>
-            <p>{item.quantity}</p>
-            <button onClick={() => handleAddToCart(item.id)}>+</button>
-            <p>£{item.price * item.quantity}</p>
-          </li>
-        ))}
+        {cart.length ? (
+          cart.map((item) => (
+            <li key={item.id}>
+              <p>{item.name}</p>
+              <button onClick={() => handleRemoveFromCart(item.id)}>-</button>
+              <p>{item.quantity}</p>
+              <button onClick={() => handleAddToCart(item.id)}>+</button>
+              <p>£{item.price * item.quantity}</p>
+            </li>
+          ))
+        ) : (
+          <h2>You don't have any items in your cart!</h2>
+        )}
       </ul>
-      <p>Total:£{total}</p>
+      {cart.length ? <p>Total:£{total}</p> : null}
     </div>
   );
 }
