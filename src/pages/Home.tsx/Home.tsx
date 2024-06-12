@@ -15,7 +15,7 @@ function Home() {
     }
   }
 
-  function handleRemove(productId: number) {
+  function handleRemoveFromCart(productId: number) {
     const product = products.find((p) => p.id === productId);
     if (product) {
       removeFromCart(productId);
@@ -34,7 +34,7 @@ function Home() {
         {products.map((product) => (
           <li key={product.id}>
             {product.name} - £{product.price}
-            <button onClick={() => handleRemove(product.id)}>-</button>
+            <button onClick={() => handleRemoveFromCart(product.id)}>-</button>
             <button onClick={() => handleAddToCart(product.id)}>+</button>
           </li>
         ))}
