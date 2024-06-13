@@ -1,4 +1,10 @@
-import { createContext, useContext, useState, ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  ReactNode,
+  useEffect,
+} from "react";
 
 interface CartItem {
   id: number;
@@ -9,6 +15,7 @@ interface CartItem {
 
 interface CartContextType {
   cart: CartItem[];
+  total?: number;
   addToCart: (item: CartItem) => void;
   removeFromCart: (id: number) => void;
 }
@@ -29,6 +36,16 @@ interface CartProviderProps {
 
 export function ShoppingCartProvider({ children }: CartProviderProps) {
   const [cart, setCart] = useState<CartItem[]>([]);
+  const [total, setTotal] = useState<number>();
+
+  useEffect(() => {
+    // Calculate the total whenever the cart changes
+    const newTotal = cart.reduce(
+      (sum, item) => sum + item.price * item.quantity,
+      0
+    );
+    setTotal(newTotal);
+  }, [cart]);
 
   const addToCart = (item: CartItem) => {
     const existingItem = cart.find((cartItem) => cartItem.id === item.id);
@@ -68,7 +85,7 @@ export function ShoppingCartProvider({ children }: CartProviderProps) {
   };
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart }}>
+    <CartContext.Provider value={{ cart, addToCart, removeFromCart, total }}>
       {children}
     </CartContext.Provider>
   );

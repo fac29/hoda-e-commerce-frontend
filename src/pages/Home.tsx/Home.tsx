@@ -6,19 +6,12 @@ import { useCart } from "../../ShoppingCartContext";
 function Home() {
   const navigate = useNavigate();
 
-  const { addToCart, removeFromCart } = useCart();
+  const { addToCart } = useCart();
 
   function handleAddToCart(productId: number) {
     const product = products.find((p) => p.id === productId);
     if (product) {
       addToCart({ ...product, quantity: 1 });
-    }
-  }
-
-  function handleRemove(productId: number) {
-    const product = products.find((p) => p.id === productId);
-    if (product) {
-      removeFromCart(productId);
     }
   }
 
@@ -34,7 +27,6 @@ function Home() {
         {products.map((product) => (
           <li key={product.id}>
             {product.name} - £{product.price}
-            <button onClick={() => handleRemove(product.id)}>-</button>
             <button onClick={() => handleAddToCart(product.id)}>+</button>
           </li>
         ))}
