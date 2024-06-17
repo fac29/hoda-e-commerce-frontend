@@ -30,9 +30,9 @@ function Home() {
           <li key={product.id}>
             {product.name} - £{product.price}
             <PlusMinusButton
-              buttonText="-"
+              buttonText="+"
               buttonClick={() => handleAddToCart(product.id)}
-            ></PlusMinusButton>
+            />
           </li>
         ))}
       </ul>
