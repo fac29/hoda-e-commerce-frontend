@@ -18,6 +18,7 @@ interface CartContextType {
   total?: number;
   addToCart: (item: CartItem) => void;
   removeFromCart: (id: number) => void;
+  cartQuantity?: number;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -37,6 +38,7 @@ interface CartProviderProps {
 export function ShoppingCartProvider({ children }: CartProviderProps) {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [total, setTotal] = useState<number>();
+  const [cartQuantity, setCartQuantity] = useState(0);
 
   useEffect(() => {
     // Calculate the total whenever the cart changes
@@ -45,6 +47,12 @@ export function ShoppingCartProvider({ children }: CartProviderProps) {
       0
     );
     setTotal(newTotal);
+
+    const quantity = cart.reduce(
+      (accumulator, item) => accumulator + item.quantity,
+      0
+    );
+    setCartQuantity(quantity);
   }, [cart]);
 
   const addToCart = (item: CartItem) => {
@@ -85,7 +93,9 @@ export function ShoppingCartProvider({ children }: CartProviderProps) {
   };
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart, total }}>
+    <CartContext.Provider
+      value={{ cart, addToCart, removeFromCart, total, cartQuantity }}
+    >
       {children}
     </CartContext.Provider>
   );

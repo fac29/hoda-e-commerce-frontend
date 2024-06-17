@@ -1,0 +1,38 @@
+button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid black; /* Border color and thickness */
+  border-radius: 0.25rem; /* Rounded corners */
+  background-color: white; /* Background color */
+  font-weight: bold; /* Font weight */
+  cursor: pointer;
+  outline: none;
+  padding: 0; /* Remove default padding */
+  box-sizing: border-box;
+}
+
+button.small {
+  width: 6rem; /* Width for small button */
+  height: 2rem; /* Height for small button */
+  font-size: 0.75rem; /* Font size for small button */
+  padding: 0;
+}
+
+button.medium {
+  width: 10rem; /* Width for medium button */
+  height: 4rem; /* Height for medium button */
+  font-size: 1.25rem; /* Font size for medium button */
+  padding: 0;
+}
+
+button.large {
+  width: 16rem; /* Width for large button */
+  height: 5rem; /* Height for large button */
+  font-size: 1.5rem; /* Font size for large button */
+  padding: 0;
+}
+
+span {
+  padding: 3px;
+}
