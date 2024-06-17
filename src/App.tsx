@@ -3,6 +3,8 @@ import AppRoutes from "./routes/AppRoutes";
 
 import { ShoppingCartProvider } from "./ShoppingCartContext";
 
+import NavBar from "./components/NavBar/NavBar";
+
 import "./App.css";
 
 function App() {
@@ -11,6 +13,7 @@ function App() {
       <ShoppingCartProvider>
         <Router>
           <div>
+            <NavBar />
             <AppRoutes />
           </div>
         </Router>
