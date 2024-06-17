@@ -24,7 +24,7 @@ function Home() {
 			<ul>
 				{products.map((product) => (
 					<ProductCard
-						productId={product.id}
+						key={product.id}
 						productName={product.name}
 						productCategory={product.category ?? 'Category'}
 						productPrice={product.price}
