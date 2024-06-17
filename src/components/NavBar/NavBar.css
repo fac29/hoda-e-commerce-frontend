@@ -1,0 +1,30 @@
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #333;
+  color: white;
+  padding: 0.5em 1em;
+  position: fixed;
+  width: 97%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.nav-left {
+  display: flex;
+  flex: 1;
+  justify-content: flex-start;
+}
+
+.nav-right {
+  display: flex;
+  flex: 3;
+  justify-content: flex-end;
+  gap: 4px;
+}
+
+.company-name {
+  color: white;
+}
