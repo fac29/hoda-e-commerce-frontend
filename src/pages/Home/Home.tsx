@@ -1,23 +1,11 @@
 // We will need to replace with our actualy products
 import { useNavigate } from 'react-router-dom';
 import { products } from '../../data';
-import { useCart } from '../../ShoppingCartContext';
-
-import PlusMinusButton from '../../components/PlusMinusButton/PlusMinusButton';
 import Button from '../../components/Button/Button';
 import ProductCard from '../../components/ProductCard/ProductCard';
 
 function Home() {
 	const navigate = useNavigate();
-
-	const { addToCart } = useCart();
-
-	function handleAddToCart(productId: number) {
-		const product = products.find((p) => p.id === productId);
-		if (product) {
-			addToCart({ ...product, quantity: 1 });
-		}
-	}
 
 	//Move to nav bar component!!
 	function goToShoppingCart() {
@@ -40,15 +28,8 @@ function Home() {
 						productName={product.name}
 						productCategory={product.category ?? 'Category'}
 						productPrice={product.price}
-						productImg={product.img ?? 'https://placehold.co/404x244'}
+						productImg={product.image ?? 'https://placehold.co/404x244'}
 					/>
-					// <li key={product.id}>
-					//   {product.name} - £{product.price}
-					//   <PlusMinusButton
-					//     buttonText="+"
-					//     buttonClick={() => handleAddToCart(product.id)}
-					//   />
-					// </li>
 				))}
 			</ul>
 		</div>
