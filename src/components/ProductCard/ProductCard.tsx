@@ -2,11 +2,9 @@ import './ProductCard.css';
 import PlusMinusButton from '../PlusMinusButton/PlusMinusButton';
 import { products } from '../../data';
 import { useCart } from '../../ShoppingCartContext';
-// import { useNavigate } from 'react-router-dom';
-// import { products } from '../../data';
 
 type ProductProps = {
-	productId: number;
+	key: number;
 	productName: string;
 	productCategory: string;
 	productPrice: number;
@@ -14,7 +12,7 @@ type ProductProps = {
 };
 
 function ProductCard({
-	productId,
+	key,
 	productName,
 	productCategory,
 	productPrice,
@@ -38,7 +36,7 @@ function ProductCard({
 				<span className='product-price'>£{productPrice}</span>
 				<PlusMinusButton
 					buttonText='+'
-					buttonClick={() => handleAddToCart(productId)}
+					buttonClick={() => handleAddToCart(key)}
 				/>
 			</div>
 		</div>
