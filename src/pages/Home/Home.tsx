@@ -1,34 +1,21 @@
 // We will need to replace with our actualy products
-import { products } from "../../data";
-import { useCart } from "../../ShoppingCartContext";
-
-import PlusMinusButton from "../../components/PlusMinusButton/PlusMinusButton";
+import { products } from '../../data';
+import ProductCard from '../../components/ProductCard/ProductCard';
 
 function Home() {
-  const { addToCart } = useCart();
-
-  function handleAddToCart(productId: number) {
-    const product = products.find((p) => p.id === productId);
-    if (product) {
-      addToCart({ ...product, quantity: 1 });
-    }
-  }
-
-  return (
-    <div>
-      <h1>Products</h1>
-      <ul>
-        {products.map((product) => (
-          <li key={product.id}>
-            {product.name} - £{product.price}
-            <PlusMinusButton
-              buttonText="+"
-              buttonClick={() => handleAddToCart(product.id)}
-            />
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
+	return (
+		<div>
+			<h1>Products</h1>
+			{products.map((product) => (
+				<ProductCard
+					key={product.id}
+					productName={product.name}
+					productCategory={product.category ?? 'Category'}
+					productPrice={product.price}
+					productImg={product.image ?? 'https://placehold.co/404x244'}
+				/>
+			))}
+		</div>
+	);
 }
 export default Home;
