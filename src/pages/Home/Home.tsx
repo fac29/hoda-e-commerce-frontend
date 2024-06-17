@@ -1,14 +1,10 @@
 // We will need to replace with our actualy products
-import { useNavigate } from "react-router-dom";
 import { products } from "../../data";
 import { useCart } from "../../ShoppingCartContext";
 
 import PlusMinusButton from "../../components/PlusMinusButton/PlusMinusButton";
-import Button from "../../components/Button/Button";
 
 function Home() {
-  const navigate = useNavigate();
-
   const { addToCart } = useCart();
 
   function handleAddToCart(productId: number) {
@@ -18,20 +14,9 @@ function Home() {
     }
   }
 
-  //Move to nav bar component!!
-  function goToShoppingCart() {
-    navigate("/shopping-cart");
-  }
-
   return (
     <div>
       <h1>Products</h1>
-      {/* Put in nav bar component!! */}
-      <Button
-        buttonText="Shopping Cart"
-        buttonClick={() => goToShoppingCart()}
-        size="large"
-      />
       <ul>
         {products.map((product) => (
           <li key={product.id}>
