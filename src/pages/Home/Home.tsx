@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { products } from "../../data";
 import { useCart } from "../../ShoppingCartContext";
 
+import PlusMinusButton from "../../components/PlusMinusButton/PlusMinusButton";
+
 function Home() {
   const navigate = useNavigate();
 
@@ -27,7 +29,10 @@ function Home() {
         {products.map((product) => (
           <li key={product.id}>
             {product.name} - £{product.price}
-            <button onClick={() => handleAddToCart(product.id)}>+</button>
+            <PlusMinusButton
+              buttonText="-"
+              buttonClick={() => handleAddToCart(product.id)}
+            ></PlusMinusButton>
           </li>
         ))}
       </ul>

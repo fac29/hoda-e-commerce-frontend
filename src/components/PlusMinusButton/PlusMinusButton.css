@@ -1,0 +1,25 @@
+.plus-minus-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2rem; /* Smaller width */
+  height: 2rem; /* Smaller height */
+  border: 2px solid black; /* Border color and thickness */
+  border-radius: 0.25rem; /* Rounded corners */
+  background-color: white; /* Background color */
+  color: black;
+  font-size: 1rem; /* Font size for the minus sign */
+  font-weight: bold; /* Font weight */
+  cursor: pointer;
+  outline: none;
+  padding: 0; /* Remove default padding */
+  box-sizing: border-box; /* Include border in the element's total width and height */
+}
+
+@media (max-width: 600px) {
+  .minus-button {
+    width: 1.5rem; /* Adjust width for smaller screens */
+    height: 1.5rem; /* Adjust height for smaller screens */
+    font-size: 0.75rem; /* Adjust font size for smaller screens */
+  }
+}
