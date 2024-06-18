@@ -2,6 +2,8 @@ import './ProductList.css';
 import ProductCard from '../../components/ProductCard/ProductCard';
 import { Product, Products } from '../../dataTypes/product';
 import { useEffect, useState } from 'react';
+import SearchBar from '../../components/SearchBar/SearchBar';
+
 async function fetchDatafromBack() {
 	const response = await fetch('http://localhost:3000/products');
 
@@ -26,9 +28,14 @@ function ProductList() {
 		fetchProducts();
 	}, []);
 
+	function handleSearch(term: string) {
+		console.log('searching:', term);
+	}
+
 	return (
 		<>
 			<h1>Products</h1>
+			<SearchBar onSearch={handleSearch} />
 			<div className='products-grid'>
 				{products?.map((book: Product) => (
 					<ProductCard
