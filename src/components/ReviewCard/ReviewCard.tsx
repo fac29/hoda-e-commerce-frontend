@@ -21,18 +21,20 @@ export function ReviewCard({
 				<span>👤</span>
 				<h3>{reviewAuthor}</h3>
 			</div>
-			{[1, 2, 3, 4, 5].map((star) => {
-				return (
-					<span
-						style={{
-							color: reviewRating >= star ? 'gold' : 'gray',
-							fontSize: '35px',
-						}}
-					>
-						★
-					</span>
-				);
-			})}
+			<div className='rating'>
+				{[1, 2, 3, 4, 5].map((star) => {
+					return (
+						<span
+							style={{
+								color: reviewRating >= star ? 'gold' : 'gray',
+								fontSize: '35px',
+							}}
+						>
+							★
+						</span>
+					);
+				})}
+			</div>
 			<h2>Review header</h2>
 			<p>{reviewComment}</p>
 		</div>
