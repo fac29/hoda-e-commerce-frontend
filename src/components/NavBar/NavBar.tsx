@@ -42,6 +42,7 @@ function NavBar() {
           buttonText="Shopping Cart"
           buttonClick={() => goToShoppingCart()}
           size="small"
+          cartButton={true}
         />
       </div>
     </nav>
