@@ -4,8 +4,10 @@ import { Product, Products } from '../../dataTypes/product';
 import { useEffect, useState } from 'react';
 import SearchBar from '../../components/SearchBar/SearchBar';
 
-async function fetchDatafromBack() {
-	const response = await fetch('http://localhost:3000/products');
+async function fetchDatafromBack(searchTerm: string) {
+	const response = await fetch(
+		`http://localhost:3000/products?search=${searchTerm}`
+	);
 
 	if (!response.ok) {
 		throw new Error(`HTTP error! status: ${response.status}`);
@@ -21,15 +23,21 @@ function ProductList() {
 
 	useEffect(() => {
 		const fetchProducts = async () => {
-			const products = await fetchDatafromBack();
+			const products = await fetchDatafromBack('');
 			setProducts(products);
 		};
 
 		fetchProducts();
 	}, []);
 
-	function handleSearch(term: string) {
-		console.log('searching:', term);
+	async function handleSearch(searchTerm: string) {
+		console.log('searching:', searchTerm);
+		try {
+			const products = await fetchDatafromBack(searchTerm);
+			setProducts(products);
+		} catch (error) {
+			console.error('Failed to fetch products:', error);
+		}
 	}
 
 	return (
