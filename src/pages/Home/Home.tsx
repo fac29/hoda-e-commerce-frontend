@@ -1,5 +1,5 @@
 // We will need to replace with our actualy products
-import Product from '../Product/Product';
+import Product from '../ProductList/ProductList';
 
 function Home() {
 	return (
