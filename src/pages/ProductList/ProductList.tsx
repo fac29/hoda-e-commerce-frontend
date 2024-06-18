@@ -1,6 +1,4 @@
-import './Product.css';
-// We will need to replace with our actual products
-//import { products } from '../../data';
+import './ProductList.css';
 import ProductCard from '../../components/ProductCard/ProductCard';
 import { Product, Products } from '../../dataTypes/product';
 import { useEffect, useState } from 'react';
