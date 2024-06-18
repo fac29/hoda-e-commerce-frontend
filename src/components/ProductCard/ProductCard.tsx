@@ -4,7 +4,7 @@ import { products } from '../../data';
 import { useCart } from '../../ShoppingCartContext';
 
 type ProductProps = {
-	key: number;
+	productId: number;
 	productName: string;
 	productCategory: string;
 	productPrice: number;
@@ -12,7 +12,7 @@ type ProductProps = {
 };
 
 function ProductCard({
-	key,
+	productId,
 	productName,
 	productCategory,
 	productPrice,
@@ -28,7 +28,7 @@ function ProductCard({
 	}
 
 	return (
-		<div className='product-card'>
+		<div className='product-card' key={productId}>
 			<img src={productImg} />
 			<h2 className='product-name'>{productName}</h2>
 			<h3 className='product-category'>{productCategory}</h3>
@@ -36,7 +36,7 @@ function ProductCard({
 				<span className='product-price'>£{productPrice}</span>
 				<PlusMinusButton
 					buttonText='+'
-					buttonClick={() => handleAddToCart(key)}
+					buttonClick={() => handleAddToCart(productId)}
 				/>
 			</div>
 		</div>
