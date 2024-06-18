@@ -45,15 +45,20 @@ function ProductList() {
 			<h1>Products</h1>
 			<SearchBar onSearch={handleSearch} />
 			<div className='products-grid'>
-				{products?.map((book: Product) => (
-					<ProductCard
-						productId={book.product_id}
-						productName={book.product_name}
-						productCategory={book.category}
-						productPrice={book.price}
-						productImg={book.product_image}
-					/>
-				))}
+				{products.length > 0 ? (
+					products.map((book: Product) => (
+						<ProductCard
+							key={book.product_id}
+							productId={book.product_id}
+							productName={book.product_name}
+							productCategory={book.category}
+							productPrice={book.price}
+							productImg={book.product_image}
+						/>
+					))
+				) : (
+					<p>No products found in the catalogue</p>
+				)}
 			</div>
 		</>
 	);
