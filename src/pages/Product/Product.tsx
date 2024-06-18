@@ -1,20 +1,44 @@
 import './Product.css';
 // We will need to replace with our actual products
-import { products } from '../../data';
+//import { products } from '../../data';
 import ProductCard from '../../components/ProductCard/ProductCard';
+import { Product, Products } from '../../dataTypes/product';
+import { useEffect, useState } from 'react';
+async function fetchDatafromBack() {
+	const response = await fetch('http://localhost:3000/products');
 
-function Product() {
+	if (!response.ok) {
+		throw new Error(`HTTP error! status: ${response.status}`);
+	}
+
+	console.log(response);
+	const data = await response.json();
+	return data;
+}
+
+function ProductList() {
+	const [products, setProducts] = useState<Products>([]);
+
+	useEffect(() => {
+		const fetchProducts = async () => {
+			const products = await fetchDatafromBack();
+			setProducts(products);
+		};
+
+		fetchProducts();
+	}, []);
+
 	return (
 		<>
 			<h1>Products</h1>
 			<div className='products-grid'>
-				{products.map((product) => (
+				{products?.map((book: Product) => (
 					<ProductCard
-						productId={product.id}
-						productName={product.name}
-						productCategory={product.category}
-						productPrice={product.price}
-						productImg={product.image}
+						productId={book.product_id}
+						productName={book.product_name}
+						productCategory={book.category}
+						productPrice={book.price}
+						productImg={book.product_image}
 					/>
 				))}
 			</div>
@@ -22,4 +46,4 @@ function Product() {
 	);
 }
 
-export default Product;
+export default ProductList;
