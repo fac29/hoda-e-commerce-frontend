@@ -20,6 +20,7 @@ async function fetchDatafromBack(searchTerm: string) {
 
 function ProductList() {
 	const [products, setProducts] = useState<Products>([]);
+	const [searchTerm, setSearchTerm] = useState<string>('');
 
 	useEffect(() => {
 		const fetchProducts = async () => {
@@ -32,6 +33,7 @@ function ProductList() {
 
 	async function handleSearch(searchTerm: string) {
 		console.log('searching:', searchTerm);
+		setSearchTerm(searchTerm);
 		try {
 			const products = await fetchDatafromBack(searchTerm);
 			setProducts(products);
@@ -57,7 +59,7 @@ function ProductList() {
 						/>
 					))
 				) : (
-					<p>No products found in the catalogue</p>
+					<p>No products matching "{searchTerm}" were found in the catalogue</p>
 				)}
 			</div>
 		</>
