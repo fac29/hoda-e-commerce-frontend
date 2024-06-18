@@ -10,7 +10,7 @@ function Product() {
 			<div className='products-grid'>
 				{products.map((product) => (
 					<ProductCard
-						key={product.id}
+						productId={product.id}
 						productName={product.name}
 						productCategory={product.category}
 						productPrice={product.price}
