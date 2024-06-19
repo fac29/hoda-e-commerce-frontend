@@ -1,11 +1,13 @@
 import { useState, FormEvent } from 'react';
 import './SignUpForm.css';
 import Button from '../Button/Button';
+import { useNavigate } from 'react-router-dom';
 
 function SignUpForm() {
 	const [username, setUsername] = useState('');
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+	const navigate = useNavigate();
 
 	async function handleSignUp(event: FormEvent) {
 		event.preventDefault();
@@ -21,6 +23,7 @@ function SignUpForm() {
 			const data = await response.json();
 			// Test log to see the response after sign up attempt
 			console.log('Sign up successful:', data);
+			navigate('/');
 		} else {
 			const errorData = await response.json();
 			// Test log to see the response after sign up attempt
