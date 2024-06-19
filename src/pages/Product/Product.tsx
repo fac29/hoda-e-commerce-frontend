@@ -1,45 +1,46 @@
 import ReviewsList from '../../components/ReviewsList/ReviewsList';
 import { fetchProductByID } from '../../utils/fetchData/fetchData';
 import { Product } from '../../utils/dataTypes/product';
-import PlusMinusButton from '../../components/PlusMinusButton/PlusMinusButton';
-import handleAddToCart from '../../utils/handleAddToCart';
-
-type ProductPageProps = {
-	productId: number;
-	productName: string;
-	productCategory: string;
-	productPrice: number;
-	productImg: string;
-	reviews: JSX.Element;
-};
+// import PlusMinusButton from '../../components/PlusMinusButton/PlusMinusButton';
+// import handleAddToCart from '../../utils/handleAddToCart';
+// import ProductCard from '../../components/ProductCard/ProductCard';
+import { useEffect, useState } from 'react';
 
 export default function ProductPage() {
-	// I need to get the id (from image clicked)
-	//const product: Product = await fetchProductByID(3);
-	//from this pass the info
+	const [product, setProduct] = useState<Product>({} as Product);
+	useEffect(() => {
+		const fetchProducts = async () => {
+			const fetchedData = await fetchProductByID(3);
+			console.log('Fetched data:', fetchedData);
+			setProduct(fetchedData as Product);
+		};
+		fetchProducts();
+	}, []);
 	return (
 		<>
 			<h2> See the book in more detail!</h2>
-			{/* <h1 className='product-name'>{(productName = product.product_name)}</h1> */}
-			<img></img>
-			<span>product description</span>
-			<ReviewsList productId={3}></ReviewsList>
-			<div> add to cart</div>
-			{/* <img className='product-img' src={(productImg = product.product_image)} /> */}
+			{product.product_name ? (
+				<>
+					<ul>
+						<li className='product-name'>{product.product_name}</li>
+						<li className='product- author'>{product.product_author}</li>
+						<li className='product-category'>{product.category}</li>
+						<li className='product-description'>
+							{product.product_description}
+						</li>
+						<li className='product-price'>{product.price}</li>
+						{/* <li className='product-image'>
+							<img>{product.product_image}</img>
+						</li> */}
+					</ul>
+				</>
+			) : (
+				<p>Loading...</p>
+			)}
 
-			<h3 className='product-category'>
-				{/* {(productCategory = product.category)} */}
-			</h3>
-			<div>
-				{/* <span className='product-price'>£{productPrice / 100}</span> */}
-				<PlusMinusButton
-					buttonText='+'
-					// buttonClick={() => handleAddToCart(productId)}
-				/>
-			</div>
+			<div> add to cart</div>
 			<div className='reviews-container'>
-				{' '}
-				{/* {reviews} */}
+				<ReviewsList productId={3}></ReviewsList>
 				<div />
 			</div>
 		</>
