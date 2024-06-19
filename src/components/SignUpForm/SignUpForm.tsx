@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, FormEvent } from 'react';
 import './SignUpForm.css';
 import Button from '../Button/Button';
 
@@ -7,8 +7,32 @@ function SignUpForm() {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 
+	async function handleSignUp(
+		event: FormEvent,
+		username: string,
+		email: string,
+		password: string
+	) {
+		event.preventDefault();
+		const response = await fetch('/localhost:3000/signup', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({ username, email, password }),
+		});
+
+		if (response.ok) {
+			const data = await response.json();
+			console.log('Sign up successful:', data);
+		} else {
+			const errorData = await response.json();
+			console.error('Sign up failed:', errorData);
+		}
+	}
+
 	return (
-		<form action='submit' className='form'>
+		<form onSubmit={() => handleSignUp} className='form'>
 			<div className='formField'>
 				<label className='formLabel' htmlFor='username'>
 					Username
@@ -51,7 +75,7 @@ function SignUpForm() {
 			</div>
 			<Button
 				buttonText='Sign Up'
-				buttonClick={() => handleSignUp()}
+				buttonClick={() => handleSignUp}
 				size='medium'
 			></Button>
 			<a className='formLink' href='/login'>
