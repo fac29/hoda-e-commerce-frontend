@@ -6,11 +6,7 @@ function LoginForm() {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 
-	async function handleLogin(
-		event: FormEvent,
-		email: string,
-		password: string
-	) {
+	async function handleLogin(event: FormEvent) {
 		event.preventDefault();
 		const response = await fetch('http://localhost:3000/login', {
 			method: 'POST',
@@ -20,14 +16,14 @@ function LoginForm() {
 			body: JSON.stringify({ email, password }),
 		});
 
-		console.log;
+		console.log(email, password);
 
 		if (response.ok) {
 			const data = await response.json();
-			console.log('Sign up successful:', data);
+			console.log('Login successful:', data);
 		} else {
 			const errorData = await response.json();
-			console.error('Sign up failed:', errorData);
+			console.error('Login failed:', errorData);
 		}
 	}
 
@@ -62,11 +58,7 @@ function LoginForm() {
 					onChange={(e) => setPassword(e.target.value)}
 				/>
 			</div>
-			<Button
-				buttonText='Login'
-				buttonClick={() => handleLogin}
-				size='medium'
-			></Button>
+			<Button buttonText='Login' size='medium'></Button>
 			<a className='formLink' href='/signup'>
 				I don't have an account yet. Take me to sign up page.
 			</a>
