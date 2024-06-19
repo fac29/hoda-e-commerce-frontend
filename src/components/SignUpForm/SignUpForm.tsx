@@ -7,28 +7,23 @@ function SignUpForm() {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 
-	async function handleSignUp(
-		event: FormEvent,
-		username: string,
-		email: string,
-		password: string
-	) {
+	async function handleSignUp(event: FormEvent) {
 		event.preventDefault();
 		const response = await fetch('http://localhost:3000/sign-up', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
 			},
-			body: JSON.stringify({ email, password, username }),
+			body: JSON.stringify({ username, email, password }),
 		});
-
-		console.log;
 
 		if (response.ok) {
 			const data = await response.json();
+			// Test log to see the response after sign up attempt
 			console.log('Sign up successful:', data);
 		} else {
 			const errorData = await response.json();
+			// Test log to see the response after sign up attempt
 			console.error('Sign up failed:', errorData);
 		}
 	}
@@ -78,11 +73,7 @@ function SignUpForm() {
 					onChange={(e) => setPassword(e.target.value)}
 				/>
 			</div>
-			<Button
-				buttonText='Sign Up'
-				buttonClick={() => handleSignUp}
-				size='medium'
-			></Button>
+			<Button buttonText='Sign Up' size='medium'></Button>
 			<a className='formLink' href='/login'>
 				I have an account already. Take me to login.
 			</a>
