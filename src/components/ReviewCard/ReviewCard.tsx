@@ -1,6 +1,6 @@
 import './ReviewCard.css';
 
-export type ReviewCardProps = {
+export type Review = {
 	productId?: number;
 	reviewId: number;
 	reviewAuthor: string;
@@ -14,7 +14,7 @@ export function ReviewCard({
 	reviewAuthor,
 	reviewRating,
 	reviewComment,
-}: ReviewCardProps) {
+}: Review) {
 	return (
 		<div key={reviewId}>
 			<div className='flex'>
