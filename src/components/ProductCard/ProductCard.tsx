@@ -29,7 +29,7 @@ function ProductCard({
 
 	return (
 		<div className='product-card' key={productId}>
-			<img src={productImg} />
+			<img className='product-img' src={productImg} />
 			<h2 className='product-name'>{productName}</h2>
 			<h3 className='product-category'>{productCategory}</h3>
 			<div>

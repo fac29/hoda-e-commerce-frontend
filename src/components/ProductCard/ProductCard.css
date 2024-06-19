@@ -2,3 +2,7 @@
 	/* Temporary border */
 	border: 2px solid black;
 }
+
+.product-img {
+	max-height: 200px;
+}
