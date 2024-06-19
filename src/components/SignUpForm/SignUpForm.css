@@ -1,0 +1,15 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+.formLabel {
+    margin-bottom: 0.5rem;
+
+}
+
+.formInput {    
+    margin-bottom: 1rem;
+}
