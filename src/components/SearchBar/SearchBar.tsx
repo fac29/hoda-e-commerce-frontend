@@ -2,7 +2,7 @@ import { useState } from 'react';
 import './SearchBar.css';
 import Button from '../Button/Button';
 
-function SearchBar({ onSearch }) {
+function SearchBar({ onSearch }: any) {
 	const [searchTerm, setSearchTerm] = useState('');
 
 	function handleSearch() {
