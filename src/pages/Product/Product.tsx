@@ -5,12 +5,15 @@ import { Product } from '../../utils/dataTypes/product';
 // import handleAddToCart from '../../utils/handleAddToCart';
 // import ProductCard from '../../components/ProductCard/ProductCard';
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 export default function ProductPage() {
+	const { id } = useParams<{ id: string }>(); // Extract the id as a string
+	const idAsNumber = id ? parseInt(id) : NaN;
 	const [product, setProduct] = useState<Product>({} as Product);
 	useEffect(() => {
 		const fetchProducts = async () => {
-			const fetchedData = await fetchProductByID(3);
+			const fetchedData = await fetchProductByID(idAsNumber);
 			console.log('Fetched data:', fetchedData);
 			setProduct(fetchedData as Product);
 		};
