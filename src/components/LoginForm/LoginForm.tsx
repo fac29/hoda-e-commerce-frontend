@@ -18,8 +18,6 @@ function LoginForm() {
 			body: JSON.stringify({ email, password }),
 		});
 
-		console.log(email, password);
-
 		if (response.ok) {
 			const data = await response.json();
 			console.log('Login successful:', data);
