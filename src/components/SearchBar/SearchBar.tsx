@@ -3,7 +3,11 @@ import './SearchBar.css';
 import Button from '../Button/Button';
 import { IoIosSearch } from 'react-icons/io';
 
-function SearchBar({ onSearch }) {
+type SearchBarProps = {
+	onSearch: (searchTerm: string) => void;
+};
+
+function SearchBar({ onSearch }: SearchBarProps) {
 	const [searchTerm, setSearchTerm] = useState('');
 
 	function handleSearch() {
