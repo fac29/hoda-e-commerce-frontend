@@ -33,7 +33,7 @@ function ProductCard({
 			<h2 className='product-name'>{productName}</h2>
 			<h3 className='product-category'>{productCategory}</h3>
 			<div>
-				<span className='product-price'>£{productPrice}</span>
+				<span className='product-price'>£{productPrice / 100}</span>
 				<PlusMinusButton
 					buttonText='+'
 					buttonClick={() => handleAddToCart(productId)}

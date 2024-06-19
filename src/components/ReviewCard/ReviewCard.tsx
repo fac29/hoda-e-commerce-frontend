@@ -1,4 +1,5 @@
 import './ReviewCard.css';
+import { FaRegUserCircle } from 'react-icons/fa';
 
 export type ReviewProps = {
 	productId?: number;
@@ -18,7 +19,7 @@ export function ReviewCard({
 	return (
 		<div key={reviewId}>
 			<div className='flex'>
-				<span>👤</span>
+				<FaRegUserCircle />
 				<h3>{reviewAuthor}</h3>
 			</div>
 			<div className='rating'>
