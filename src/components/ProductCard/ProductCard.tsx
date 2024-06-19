@@ -1,6 +1,8 @@
 import './ProductCard.css';
 import PlusMinusButton from '../PlusMinusButton/PlusMinusButton';
-import { products } from '../../data';
+//import { useCart } from '../../ShoppingCartContext';
+// import { fetchDatafromBack } from '../../utils/fetchData/fetchData';
+import { handleAddToCart } from '../../utils/handleCart/handleCart';
 import { useCart } from '../../ShoppingCartContext';
 
 type ProductProps = {
@@ -18,14 +20,8 @@ function ProductCard({
 	productPrice,
 	productImg,
 }: ProductProps) {
+	
 	const { addToCart } = useCart();
-
-	function handleAddToCart(productId: number) {
-		const product = products.find((p) => p.id === productId);
-		if (product) {
-			addToCart({ ...product, quantity: 1 });
-		}
-	}
 
 	return (
 		<div className='product-card' key={productId}>
@@ -36,7 +32,7 @@ function ProductCard({
 				<span className='product-price'>£{productPrice / 100}</span>
 				<PlusMinusButton
 					buttonText='+'
-					buttonClick={() => handleAddToCart(productId)}
+					buttonClick={() => handleAddToCart(productId, addToCart)}
 				/>
 			</div>
 		</div>

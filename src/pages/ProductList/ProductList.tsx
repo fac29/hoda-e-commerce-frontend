@@ -1,23 +1,9 @@
 import './ProductList.css';
 import ProductCard from '../../components/ProductCard/ProductCard';
-import { Product, Products } from '../../dataTypes/product';
+import { Product, Products } from '../../utils/dataTypes/product';
 import { useEffect, useState } from 'react';
 import SearchBar from '../../components/SearchBar/SearchBar';
-
-async function fetchDatafromBack(searchTerm: string) {
-	const response = await fetch(
-		`http://localhost:3000/products?search=${searchTerm}`
-	);
-
-	if (!response.ok) {
-		throw new Error(`HTTP error! status: ${response.status}`);
-	}
-
-	console.log(response);
-	const data = await response.json();
-	return data;
-}
-
+import { fetchDatafromBack } from '../../utils/fetchData/fetchData';
 function ProductList() {
 	const [products, setProducts] = useState<Products>([]);
 	const [searchTerm, setSearchTerm] = useState<string>('');
