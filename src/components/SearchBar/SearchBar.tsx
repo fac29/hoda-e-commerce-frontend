@@ -2,7 +2,11 @@ import { useState } from 'react';
 import './SearchBar.css';
 import Button from '../Button/Button';
 
-function SearchBar({ onSearch }: any) {
+type SearchBarProps = {
+	onSearch: (searchTerm: string) => void;
+};
+
+function SearchBar({ onSearch }: SearchBarProps) {
 	const [searchTerm, setSearchTerm] = useState('');
 
 	function handleSearch() {
