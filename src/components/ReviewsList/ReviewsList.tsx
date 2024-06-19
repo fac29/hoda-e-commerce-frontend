@@ -36,7 +36,7 @@ export default function ReviewsList({ productId }: ReviewsListProp) {
 		<>
 			<h2>Reviews</h2>
 			<div className='reviews-list'>
-				{reviews.length > 0 ? (
+				{reviews.length > 0 && reviews[0].rating != null ? (
 					reviews.map((review: Review) => (
 						<ReviewCard
 							key={review.review_id}
