@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import './SearchBar.css';
 import Button from '../Button/Button';
+import { IoIosSearch } from 'react-icons/io';
 
 function SearchBar({ onSearch }) {
 	const [searchTerm, setSearchTerm] = useState('');
@@ -26,6 +27,7 @@ function SearchBar({ onSearch }) {
 			/>
 			<Button
 				buttonText='Search'
+				icon={<IoIosSearch />}
 				buttonClick={() => handleSearch()}
 				size='small'
 			/>
