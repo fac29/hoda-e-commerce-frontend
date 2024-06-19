@@ -14,13 +14,15 @@ function SignUpForm() {
 		password: string
 	) {
 		event.preventDefault();
-		const response = await fetch('/localhost:3000/signup', {
+		const response = await fetch('http://localhost:3000/sign-up', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
 			},
-			body: JSON.stringify({ username, email, password }),
+			body: JSON.stringify({ email, password, username }),
 		});
+
+		console.log;
 
 		if (response.ok) {
 			const data = await response.json();
@@ -32,7 +34,7 @@ function SignUpForm() {
 	}
 
 	return (
-		<form onSubmit={() => handleSignUp} className='form'>
+		<form onSubmit={handleSignUp} className='form'>
 			<div className='formField'>
 				<label className='formLabel' htmlFor='username'>
 					Username
@@ -41,6 +43,7 @@ function SignUpForm() {
 					className='formInput'
 					type='text'
 					name='username'
+					id='username'
 					placeholder='username'
 					value={username}
 					onChange={(e) => setUsername(e.target.value)}
@@ -55,6 +58,7 @@ function SignUpForm() {
 					className='formInput'
 					type='email'
 					name='email'
+					id='email'
 					placeholder='Email Address'
 					value={email}
 					onChange={(e) => setEmail(e.target.value)}
@@ -68,6 +72,7 @@ function SignUpForm() {
 					className='formInput'
 					type='password'
 					name='password'
+					id='password'
 					placeholder='Password'
 					value={password}
 					onChange={(e) => setPassword(e.target.value)}
