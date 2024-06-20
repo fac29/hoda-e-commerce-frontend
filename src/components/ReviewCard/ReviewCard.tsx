@@ -36,7 +36,7 @@ export function ReviewCard({
 					);
 				})}
 			</div>
-			<h2>Review header</h2>
+			{/* <h2>Review header</h2> */}
 			<p>{reviewComment}</p>
 		</div>
 	);
