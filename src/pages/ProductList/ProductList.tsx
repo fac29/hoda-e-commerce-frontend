@@ -1,24 +1,13 @@
 import './ProductList.css';
 import ProductCard from '../../components/ProductCard/ProductCard';
-import { Product, Products } from '../../dataTypes/product';
+import { Product, Products } from '../../utils/dataTypes/product';
 import { useEffect, useState } from 'react';
 import SearchBar from '../../components/SearchBar/SearchBar';
-
-async function fetchDatafromBack(searchTerm: string) {
-	const response = await fetch(
-		`http://localhost:3000/products?search=${searchTerm}`
-	);
-
-	if (!response.ok) {
-		throw new Error(`HTTP error! status: ${response.status}`);
-	}
-
-	console.log(response);
-	const data = await response.json();
-	return data;
-}
+import { fetchDatafromBack } from '../../utils/fetchData/fetchData';
+import { Link } from 'react-router-dom';
 
 function ProductList() {
+
 	const [products, setProducts] = useState<Products>([]);
 	const [searchTerm, setSearchTerm] = useState<string>('');
 
@@ -49,14 +38,16 @@ function ProductList() {
 			<div className='products-grid'>
 				{products.length > 0 ? (
 					products.map((book: Product) => (
-						<ProductCard
-							key={book.product_id}
-							productId={book.product_id}
-							productName={book.product_name}
-							productCategory={book.category}
-							productPrice={book.price}
-							productImg={book.product_image}
-						/>
+						<Link to={`/products/${book.product_id}`} className='product-button' key={book.product_id}>
+							<ProductCard
+								key={book.product_id}
+								productId={book.product_id}
+								productName={book.product_name}
+								productCategory={book.category}
+								productPrice={book.price}
+								productImg={book.product_image}
+							/>
+						</Link>
 					))
 				) : (
 					<p>No products matching "{searchTerm}" were found in the catalogue</p>

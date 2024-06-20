@@ -4,8 +4,7 @@ import Checkout from '../pages/Checkout/Checkout';
 import SignUp from '../pages/SignUp/SignUp';
 import Login from '../pages/Login/Login';
 import ShoppingCart from '../pages/ShoppingCart/ShoppingCart';
-import Product from '../pages/ProductList/ProductList';
-
+import ProductPage from '../pages/Product/Product';
 function AppRoutes() {
 	return (
 		<Routes>
@@ -14,7 +13,7 @@ function AppRoutes() {
 			<Route path='/signup' element={<SignUp />} />
 			<Route path='/login' element={<Login />} />
 			<Route path='/shopping-cart' element={<ShoppingCart />} />
-			<Route path='/product/:product' element={<Product />} />
+			<Route path='/products/:id' element={<ProductPage />} />
 		</Routes>
 	);
 }

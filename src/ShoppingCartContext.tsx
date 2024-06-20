@@ -6,14 +6,14 @@ import {
   useEffect,
 } from "react";
 
-interface CartItem {
+export interface CartItem {
   id: number;
   name: string;
   price: number;
   quantity: number;
 }
 
-interface CartContextType {
+export interface CartContextType {
   cart: CartItem[];
   total?: number;
   addToCart: (item: CartItem) => void;

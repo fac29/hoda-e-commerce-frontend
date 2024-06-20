@@ -1,33 +1,34 @@
 import { useNavigate } from "react-router-dom";
 
-import { products } from "../../data";
+// import { products } from "../../data";
 
 import { useCart } from "../../ShoppingCartContext";
+import { handleAddToCart, handleRemoveFromCart } from "../../utils/handleCart/handleCart";
 
 function ShoppingCart() {
   const navigate = useNavigate();
 
   const { cart, total } = useCart();
-
+	const { addToCart, removeFromCart } = useCart();
   function handleBack() {
     navigate("/");
   }
 
-  const { addToCart, removeFromCart } = useCart();
+  // const { addToCart, removeFromCart } = useCart();
 
-  function handleAddToCart(productId: number) {
-    const product = products.find((p) => p.id === productId);
-    if (product) {
-      addToCart({ ...product, quantity: 1 });
-    }
-  }
+  // function handleAddToCart(productId: number) {
+  //   const product = products.find((p) => p.id === productId);
+  //   if (product) {
+  //     addToCart({ ...product, quantity: 1 });
+  //   }
+  // }
 
-  function handleRemoveFromCart(productId: number) {
-    const product = products.find((p) => p.id === productId);
-    if (product) {
-      removeFromCart(productId);
-    }
-  }
+  // function handleRemoveFromCart(productId: number) {
+  //   const product = products.find((p) => p.id === productId);
+  //   if (product) {
+  //     removeFromCart(productId);
+  //   }
+  // }
 
   function goToCheckout() {
     navigate("/checkout");
@@ -42,9 +43,8 @@ function ShoppingCart() {
           cart.map((item) => (
             <li key={item.id}>
               <p>{item.name}</p>
-              <button onClick={() => handleRemoveFromCart(item.id)}>-</button>
+              <button onClick={() => handleRemoveFromCart(item.id, removeFromCart)}>-</button>
               <p>{item.quantity}</p>
-              <button onClick={() => handleAddToCart(item.id)}>+</button>
               <p>£{item.price * item.quantity}</p>
             </li>
           ))

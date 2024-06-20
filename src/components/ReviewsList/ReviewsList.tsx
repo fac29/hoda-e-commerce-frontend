@@ -1,7 +1,7 @@
 import './ReviewsList.css';
 import { ReviewCard } from '../ReviewCard/ReviewCard';
 import { useEffect, useState } from 'react';
-import { Review, Reviews } from '../../dataTypes/review';
+import { Review, Reviews } from '../../utils/dataTypes/review';
 
 type ReviewsListProp = {
 	productId: number;
