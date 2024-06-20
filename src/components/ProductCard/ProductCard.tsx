@@ -1,9 +1,7 @@
 import './ProductCard.css';
 import PlusMinusButton from '../PlusMinusButton/PlusMinusButton';
-//import { useCart } from '../../ShoppingCartContext';
-// import { fetchDatafromBack } from '../../utils/fetchData/fetchData';
-import { handleAddToCart } from '../../utils/handleCart/handleCart';
 import { useCart } from '../../ShoppingCartContext';
+import { Link } from 'react-router-dom';
 
 type ProductProps = {
 	productId: number;
@@ -20,19 +18,28 @@ function ProductCard({
 	productPrice,
 	productImg,
 }: ProductProps) {
-	
-	const { addToCart } = useCart();
-
+	const { handleAddToCart } = useCart();
 	return (
 		<div className='product-card' key={productId}>
-			<img className='product-img' src={productImg} />
-			<h2 className='product-name'>{productName}</h2>
-			<h3 className='product-category'>{productCategory}</h3>
-			<div>
-				<span className='product-price'>£{productPrice / 100}</span>
+			<div className='product-info'>
+				<Link
+					to={`/products/${productId}`}
+					className='product-button'
+					key={productId}
+				>
+					<img className='product-img' src={productImg} />
+					<h2 className='product-name'>{productName}</h2>
+					<h3 className='product-category'>{productCategory}</h3>
+				</Link>
+				<div />
+				<div>
+					<span className='product-price'>£{productPrice / 100}</span>
+				</div>
+			</div>
+			<div className='add-to-cart'>
 				<PlusMinusButton
 					buttonText='+'
-					buttonClick={() => handleAddToCart(productId, addToCart)}
+					buttonClick={() => handleAddToCart(productId)}
 				/>
 			</div>
 		</div>
