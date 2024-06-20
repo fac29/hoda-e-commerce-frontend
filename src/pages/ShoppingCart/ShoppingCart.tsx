@@ -44,7 +44,7 @@ function ShoppingCart() {
 					<h2>You don't have any items in your cart!</h2>
 				)}
 			</ul>
-			{cart.length ? <p>Total:£{total}</p> : null}
+			{cart.length ? <p>Total:£{total ? total / 100 : null}</p> : null};
 			{cart.length ? <button onClick={goToCheckout}>Checkout</button> : null}
 		</div>
 	);
