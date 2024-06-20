@@ -31,10 +31,13 @@ export default function ProductPage() {
 						<li className='product-description'>
 							{product.product_description}
 						</li>
-						<li className='product-price'>{product.price}</li>
-						{/* <li className='product-image'>
-							<img>{product.product_image}</img>
-						</li> */}
+						<li className='product-price'>£{product.price / 100}</li>
+						<li className='product-image'>
+							<img
+								style={{ maxHeight: 200 }}
+								src={'/' + product.product_image}
+							/>
+						</li>
 					</ul>
 				</>
 			) : (
