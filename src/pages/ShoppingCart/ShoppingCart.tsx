@@ -1,11 +1,12 @@
 import { useNavigate } from 'react-router-dom';
 
 import { useCart } from '../../ShoppingCartContext';
+import PlusMinusButton from '../../components/PlusMinusButton/PlusMinusButton';
 
 function ShoppingCart() {
 	const navigate = useNavigate();
 
-	const { cart, total, handleRemoveFromCart } = useCart();
+	const { cart, total, handleRemoveFromCart, handleAddToCart } = useCart();
 
 	function handleBack() {
 		navigate('/');
@@ -26,11 +27,17 @@ function ShoppingCart() {
 					cart.map((item) => (
 						<li key={item.product_id}>
 							<p>{item.product_name}</p>
-							<button onClick={() => handleRemoveFromCart(item.product_id)}>
-								-
-							</button>
+							<PlusMinusButton
+								buttonText='-'
+								buttonClick={() => handleRemoveFromCart(item.product_id)}
+							/>
+							<PlusMinusButton
+								buttonText='+'
+								buttonClick={() => handleAddToCart(item.product_id)}
+							/>
+
 							<p>{item.quantity}</p>
-							<p>£{item.price * item.quantity}</p>
+							<p>£{(item.price * item.quantity) / 100}</p>
 						</li>
 					))
 				) : (
