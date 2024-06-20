@@ -7,6 +7,7 @@ export type Product = {
 	price: number;
 	product_image: string;
 	stock: number;
+	quantity: number;
 };
 
 export type Products = Product[];

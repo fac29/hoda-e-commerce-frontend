@@ -46,7 +46,7 @@ export default function ProductPage() {
 
 			<div> add to cart</div>
 			<div className='reviews-container'>
-				<ReviewsList productId={3}></ReviewsList>
+				<ReviewsList productId={idAsNumber}></ReviewsList>
 				<div />
 			</div>
 		</>
