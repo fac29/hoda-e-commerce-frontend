@@ -1,0 +1,18 @@
+.container {
+	display: flex;
+}
+
+.buttons {
+	display: flex;
+	justify-content: space-around;
+}
+
+.alignBtnWText {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.product-name {
+	font-weight: 900;
+}
