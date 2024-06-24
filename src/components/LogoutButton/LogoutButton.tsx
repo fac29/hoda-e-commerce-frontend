@@ -6,13 +6,13 @@ function LogoutButton() {
 		try {
 			const response = await fetch('http://localhost:3000/logout', {
 				method: 'POST',
-				credentials: 'include', // Include credentials (cookies) with the request
+				credentials: 'include',
 			});
 
 			if (response.ok) {
 				const data = await response.json();
 				console.log('Logout successful:', data);
-				// Perform any additional logout logic, such as redirecting the user
+				alert('You have been logged out successfully!');
 			} else {
 				const errorData = await response.json();
 				console.error('Logout failed:', errorData);
