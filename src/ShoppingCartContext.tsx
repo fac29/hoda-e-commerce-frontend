@@ -23,6 +23,8 @@ export interface CartContextType {
 	cartQuantity?: number;
 	handleAddToCart: (productId: number) => void;
 	handleRemoveFromCart: (productId: number) => void;
+	loggedIn: boolean;
+	handleLoggedIn: (login: boolean) => void;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -43,6 +45,7 @@ export function ShoppingCartProvider({ children }: CartProviderProps) {
 	const [cart, setCart] = useState<CartItem[]>([]);
 	const [total, setTotal] = useState<number>();
 	const [cartQuantity, setCartQuantity] = useState(0);
+	const [loggedIn, setLoggedIn] = useState(false);
 
 	useEffect(() => {
 		// Calculate the total whenever the cart changes
@@ -123,6 +126,10 @@ export function ShoppingCartProvider({ children }: CartProviderProps) {
 		}
 	}
 
+	function handleLoggedIn(login: boolean) {
+		setLoggedIn(login);
+	}
+
 	return (
 		<CartContext.Provider
 			value={{
@@ -133,6 +140,8 @@ export function ShoppingCartProvider({ children }: CartProviderProps) {
 				cartQuantity,
 				handleAddToCart,
 				handleRemoveFromCart,
+				loggedIn,
+				handleLoggedIn,
 			}}
 		>
 			{children}
