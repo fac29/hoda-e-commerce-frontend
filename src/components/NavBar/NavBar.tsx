@@ -1,12 +1,13 @@
-import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import Button from '../Button/Button';
 import { IoCartOutline } from 'react-icons/io5';
+import { useCart } from '../../ShoppingCartContext';
 
 import './NavBar.css';
 
 function NavBar() {
 	const navigate = useNavigate();
+	const { loggedIn } = useCart();
 
 	function goToShoppingCart() {
 		navigate('/shopping-cart');
@@ -18,6 +19,10 @@ function NavBar() {
 
 	function goToSignUp() {
 		navigate('/signup');
+	}
+
+	function goToLogOut() {
+		navigate('/logout');
 	}
 
 	return (
