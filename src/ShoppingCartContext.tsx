@@ -136,14 +136,16 @@ export function ShoppingCartProvider({ children }: CartProviderProps) {
 
 	async function handleLoggedIn(login: boolean) {
 		setLoggedIn(login);
-		const user = await fetchSessionById();
-		console.log(user);
-		if (user) {
-			const userID = user.user_id;
-			setUserID(userID);
-			const currentUser: User = await fetchUserByID(userID);
-			const currentUsername = currentUser.username;
-			setUsername(currentUsername);
+		if (login) {
+			const user = await fetchSessionById();
+			console.log(user);
+			if (user) {
+				const userID = user.user_id;
+				setUserID(userID);
+				const currentUser: User = await fetchUserByID(userID);
+				const currentUsername = currentUser.username;
+				setUsername(currentUsername);
+			}
 		}
 	}
 
