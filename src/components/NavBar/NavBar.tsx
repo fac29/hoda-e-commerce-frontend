@@ -1,14 +1,40 @@
 import { useNavigate, Link } from 'react-router-dom';
+// import { useState, useEffect } from 'react';
 import Button from '../Button/Button';
 import { IoCartOutline } from 'react-icons/io5';
-import { useCart } from '../../ShoppingCartContext';
 import LogoutButton from '../LogoutButton/LogoutButton';
-
+// import { fetchSessionById } from '../../utils/fetchSession/fetchSession';
+// import { fetchUserByID } from '../../utils/fetchUser/fetchUser';
+// import type User from '../../utils/dataTypes/user';
+import { useCart } from '../../ShoppingCartContext';
 import './NavBar.css';
 
 function NavBar() {
 	const navigate = useNavigate();
 	const { loggedIn, username } = useCart();
+	// const [loggedIn, setLoggedIn] = useState(false);
+	// const [username, setUsername] = useState('');
+	// // const [userId, setUserId] = useState(0);
+	// const [session, setSession] = useState({});
+
+	// useEffect(() => {
+	// 	async function handleLoggedIn() {
+	// 		const newSession = await fetchSessionById();
+	// 		setSession(newSession);
+	// 		console.log(session);
+	// 		if (session) {
+	// 			setLoggedIn(true);
+	// 			const userID = session.user_id;
+	// 			const currentUser: User = await fetchUserByID(userID);
+	// 			const currentUsername = currentUser.username;
+	// 			setUsername(currentUsername);
+	// 		} else {
+	// 			setLoggedIn(false);
+	// 		}
+	// 	}
+
+	// 	handleLoggedIn();
+	// }, [session]);
 
 	function goToShoppingCart() {
 		navigate('/shopping-cart');
