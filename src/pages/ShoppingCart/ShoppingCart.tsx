@@ -2,12 +2,13 @@ import { useNavigate } from 'react-router-dom';
 
 import { useCart } from '../../ShoppingCartContext';
 import PlusMinusButton from '../../components/PlusMinusButton/PlusMinusButton';
-
+import { Modal } from '../../components/Modal/Modal';
+import { useState } from 'react';
 const requestUrl = import.meta.env.VITE_REQUEST_URL;
 
 function ShoppingCart() {
 	const navigate = useNavigate();
-
+	const [isOpen, setIsOpen] = useState(false);
 	const {
 		cart,
 		total,
@@ -24,6 +25,8 @@ function ShoppingCart() {
 	function goToCheckout() {
 		if (loggedIn) {
 			navigate('/checkout');
+		} else {
+			setIsOpen(true);
 		}
 	}
 
@@ -60,6 +63,9 @@ function ShoppingCart() {
 				)}
 			</ul>
 			{cart.length ? <p>Total: £{total ? total / 100 : null}</p> : null}
+			{isOpen && (
+				<Modal textModal='Please Log In to Checkout' setIsOpen={setIsOpen} />
+			)}
 			{cart.length ? <button onClick={goToCheckout}>Checkout</button> : null}
 		</div>
 	);
