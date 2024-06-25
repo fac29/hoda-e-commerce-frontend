@@ -22,7 +22,9 @@ function ShoppingCart() {
 	}
 
 	function goToCheckout() {
-		navigate('/checkout');
+		if (loggedIn) {
+			navigate('/checkout');
+		}
 	}
 
 	async function handleCheckout() {

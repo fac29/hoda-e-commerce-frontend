@@ -30,7 +30,7 @@ function NavBar() {
 		<nav className='nav-container'>
 			<div className='nav-left'>
 				<Link className='company-name' to='/'>
-					Ganoush
+					Ganoush Limited. 
 				</Link>
 			</div>
 			<div className='nav-right'>
