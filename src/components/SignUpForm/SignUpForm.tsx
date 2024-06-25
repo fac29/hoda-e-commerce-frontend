@@ -7,10 +7,49 @@ function SignUpForm() {
 	const [username, setUsername] = useState('');
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+	const [errors, setErrors] = useState<{
+		username?: string;
+		email?: string;
+		password?: string;
+	}>({});
 	const navigate = useNavigate();
+
+	const validateEmail = (email: string) => {
+		const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+		return re.test(String(email).toLowerCase());
+	};
+
+	const validatePassword = (password: string) => {
+		return password.length >= 8;
+	};
+
+	const validateUsername = (username: string) => {
+		return username.trim() !== '';
+	};
+
+	const validateForm = () => {
+		const newErrors: { username?: string; email?: string; password?: string } =
+			{};
+		if (!validateUsername(username)) {
+			newErrors.username = 'Username cannot be empty.';
+		}
+		if (!validateEmail(email)) {
+			newErrors.email = 'Please enter a valid email address.';
+		}
+		if (!validatePassword(password)) {
+			newErrors.password = 'Password must be at least 8 characters long.';
+		}
+		setErrors(newErrors);
+		return Object.keys(newErrors).length === 0;
+	};
 
 	async function handleSignUp(event: FormEvent) {
 		event.preventDefault();
+
+		if (!validateForm()) {
+			return;
+		}
+
 		const response = await fetch('http://localhost:3000/sign-up', {
 			method: 'POST',
 			headers: {
@@ -43,13 +82,13 @@ function SignUpForm() {
 					type='text'
 					name='username'
 					id='username'
-					placeholder='username'
+					placeholder='Username'
 					value={username}
 					onChange={(e) => setUsername(e.target.value)}
 				/>
+				{errors.username && <span className='error'>{errors.username}</span>}
 			</div>
 			<div className='formField'>
-				{' '}
 				<label className='formLabel' htmlFor='email'>
 					Email Address
 				</label>
@@ -62,6 +101,7 @@ function SignUpForm() {
 					value={email}
 					onChange={(e) => setEmail(e.target.value)}
 				/>
+				{errors.email && <span className='error'>{errors.email}</span>}
 			</div>
 			<div className='formField'>
 				<label className='formLabel' htmlFor='password'>
@@ -76,6 +116,7 @@ function SignUpForm() {
 					value={password}
 					onChange={(e) => setPassword(e.target.value)}
 				/>
+				{errors.password && <span className='error'>{errors.password}</span>}
 			</div>
 			<Button buttonText='Sign Up' size='medium'></Button>
 			<a className='formLink' href='/login'>
