@@ -10,7 +10,7 @@ import { fetchProductByID } from './utils/fetchData/fetchData';
 import { fetchSessionById } from './utils/fetchSession/fetchSession';
 import { fetchUserByID } from './utils/fetchUser/fetchUser';
 import type User from './utils/dataTypes/user';
-import type Session from './utils/dataTypes/session';
+// import type Session from './utils/dataTypes/session';
 
 export interface CartItem {
 	product_id: number;
