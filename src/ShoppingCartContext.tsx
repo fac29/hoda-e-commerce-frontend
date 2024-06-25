@@ -138,7 +138,6 @@ export function ShoppingCartProvider({ children }: CartProviderProps) {
 		setLoggedIn(login);
 		if (login) {
 			const user = await fetchSessionById();
-			console.log(user);
 			if (user) {
 				const userID = user.user_id;
 				setUserID(userID);
