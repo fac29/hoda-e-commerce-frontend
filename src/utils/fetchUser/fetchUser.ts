@@ -1,7 +1,9 @@
 import User from '../dataTypes/user';
 
+const requestUrl = import.meta.env.VITE_REQUEST_URL;
+
 export async function fetchUserByID(id: number) {
-	const response = await fetch(`http://localhost:3000/user/${id}`);
+	const response = await fetch(`${requestUrl}/user/${id}`);
 
 	if (!response.ok) {
 		throw new Error(`HTTP error! status: ${response.status}`);
