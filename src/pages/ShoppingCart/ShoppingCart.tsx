@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { useCart } from '../../ShoppingCartContext';
 import PlusMinusButton from '../../components/PlusMinusButton/PlusMinusButton';
 
+const requestUrl = import.meta.env.VITE_REQUEST_URL;
+
 function ShoppingCart() {
 	const navigate = useNavigate();
 
@@ -12,10 +14,12 @@ function ShoppingCart() {
 		navigate('/');
 	}
 
-	// const { addToCart, removeFromCart } = useCart();
-
 	function goToCheckout() {
 		navigate('/checkout');
+	}
+
+	async function handleCheckout() {
+		const response = await fetch(`${requestUrl}/checkout`);
 	}
 
 	return (
