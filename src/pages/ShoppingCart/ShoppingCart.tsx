@@ -19,7 +19,9 @@ function ShoppingCart() {
 	}
 
 	async function handleCheckout() {
-		const response = await fetch(`${requestUrl}/checkout`);
+		const response = await fetch(`${requestUrl}/checkout`, {
+			method: 'POST',
+		});
 	}
 
 	return (
