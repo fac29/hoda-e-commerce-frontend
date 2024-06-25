@@ -3,6 +3,9 @@ import './SignUpForm.css';
 import Button from '../Button/Button';
 import { useNavigate } from 'react-router-dom';
 
+
+const requestUrl = import.meta.env.VITE_REQUEST_URL;
+
 function SignUpForm() {
 	const [username, setUsername] = useState('');
 	const [email, setEmail] = useState('');
@@ -50,7 +53,7 @@ function SignUpForm() {
 			return;
 		}
 
-		const response = await fetch('http://localhost:3000/sign-up', {
+		const response = await fetch(`${requestUrl}/sign-up`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',

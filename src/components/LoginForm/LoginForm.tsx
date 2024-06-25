@@ -3,6 +3,9 @@ import './LoginForm.css';
 import Button from '../Button/Button';
 import { useNavigate } from 'react-router-dom';
 
+
+const requestUrl = import.meta.env.VITE_REQUEST_URL;
+
 function LoginForm() {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
@@ -39,7 +42,7 @@ function LoginForm() {
 			return;
 		}
 
-		const response = await fetch('http://localhost:3000/login', {
+		const response = await fetch(`${requestUrl}/login`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',

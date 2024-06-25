@@ -1,10 +1,13 @@
 import './LogoutButton.css';
 import Button from '../Button/Button';
 
+
+const requestUrl = import.meta.env.VITE_REQUEST_URL;
+
 function LogoutButton() {
 	async function handleLogout() {
 		try {
-			const response = await fetch('http://localhost:3000/logout', {
+			const response = await fetch(`${requestUrl}/logout`, {
 				method: 'POST',
 				credentials: 'include',
 			});
