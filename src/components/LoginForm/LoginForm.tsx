@@ -2,6 +2,7 @@ import { useState, FormEvent } from 'react';
 import './LoginForm.css';
 import Button from '../Button/Button';
 import { useNavigate } from 'react-router-dom';
+import { useCart } from '../../ShoppingCartContext';
 
 
 const requestUrl = import.meta.env.VITE_REQUEST_URL;
@@ -35,6 +36,7 @@ function LoginForm() {
 	};
 
 	const navigate = useNavigate();
+	const { handleLoggedIn } = useCart();
 
 	async function handleLogin(event: FormEvent) {
 		event.preventDefault();
@@ -54,6 +56,7 @@ function LoginForm() {
 		if (response.ok) {
 			const data = await response.json();
 			console.log('Login successful:', data);
+			handleLoggedIn(true);
 			navigate('/');
 		} else {
 			const errorData = await response.json();

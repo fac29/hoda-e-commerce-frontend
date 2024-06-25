@@ -2,6 +2,7 @@ import { useState, FormEvent } from 'react';
 import './SignUpForm.css';
 import Button from '../Button/Button';
 import { useNavigate } from 'react-router-dom';
+import { useCart } from '../../ShoppingCartContext';
 
 
 const requestUrl = import.meta.env.VITE_REQUEST_URL;
@@ -15,6 +16,7 @@ function SignUpForm() {
 		email?: string;
 		password?: string;
 	}>({});
+	const { handleLoggedIn } = useCart();
 	const navigate = useNavigate();
 
 	const validateEmail = (email: string) => {
@@ -66,6 +68,7 @@ function SignUpForm() {
 			const data = await response.json();
 			// Test log to see the response after sign up attempt
 			console.log('Sign up successful:', data);
+			handleLoggedIn(true);
 			navigate('/');
 		} else {
 			const errorData = await response.json();
