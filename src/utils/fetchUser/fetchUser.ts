@@ -1,6 +1,6 @@
-import { User } from '../dataTypes/user';
+import User from '../dataTypes/user';
 
-export async function fetchUserById(id: number) {
+export async function fetchUserByID(id: number) {
 	const response = await fetch(`http://localhost:3000/user/${id}`);
 
 	if (!response.ok) {
