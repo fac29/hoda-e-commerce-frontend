@@ -2,12 +2,15 @@ import './LogoutButton.css';
 import Button from '../Button/Button';
 import { useCart } from '../../ShoppingCartContext';
 
+
+const requestUrl = import.meta.env.VITE_REQUEST_URL;
+
 function LogoutButton() {
 	const { handleLoggedIn } = useCart();
 
 	async function handleLogout() {
 		try {
-			const response = await fetch('http://localhost:3000/logout', {
+			const response = await fetch(`${requestUrl}/logout`, {
 				method: 'POST',
 				credentials: 'include',
 			});
