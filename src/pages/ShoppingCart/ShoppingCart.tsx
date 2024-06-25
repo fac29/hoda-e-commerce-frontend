@@ -8,7 +8,14 @@ const requestUrl = import.meta.env.VITE_REQUEST_URL;
 function ShoppingCart() {
 	const navigate = useNavigate();
 
-	const { cart, total, handleRemoveFromCart, handleAddToCart } = useCart();
+	const {
+		cart,
+		total,
+		handleRemoveFromCart,
+		handleAddToCart,
+		loggedIn,
+		userID,
+	} = useCart();
 
 	function handleBack() {
 		navigate('/');
