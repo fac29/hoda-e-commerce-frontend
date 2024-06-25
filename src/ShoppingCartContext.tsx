@@ -7,6 +7,10 @@ import {
 } from 'react';
 
 import { fetchProductByID } from './utils/fetchData/fetchData';
+import { fetchSessionById } from './utils/fetchSession/fetchSession';
+import { fetchUserByID } from './utils/fetchUser/fetchUser';
+import type User from './utils/dataTypes/user';
+import type Session from './utils/dataTypes/session';
 
 export interface CartItem {
 	product_id: number;
@@ -25,6 +29,8 @@ export interface CartContextType {
 	handleRemoveFromCart: (productId: number) => void;
 	loggedIn: boolean;
 	handleLoggedIn: (login: boolean) => void;
+	username: string;
+	userID: number;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -46,6 +52,8 @@ export function ShoppingCartProvider({ children }: CartProviderProps) {
 	const [total, setTotal] = useState<number>();
 	const [cartQuantity, setCartQuantity] = useState(0);
 	const [loggedIn, setLoggedIn] = useState(false);
+	const [username, setUsername] = useState('');
+	const [userID, setUserID] = useState(0);
 
 	useEffect(() => {
 		// Calculate the total whenever the cart changes
@@ -126,8 +134,17 @@ export function ShoppingCartProvider({ children }: CartProviderProps) {
 		}
 	}
 
-	function handleLoggedIn(login: boolean) {
+	async function handleLoggedIn(login: boolean) {
 		setLoggedIn(login);
+		const user = await fetchSessionById();
+		console.log(user);
+		if (user) {
+			const userID = user.user_id;
+			setUserID(userID);
+			const currentUser: User = await fetchUserByID(userID);
+			const currentUsername = currentUser.username;
+			setUsername(currentUsername);
+		}
 	}
 
 	return (
@@ -142,6 +159,8 @@ export function ShoppingCartProvider({ children }: CartProviderProps) {
 				handleRemoveFromCart,
 				loggedIn,
 				handleLoggedIn,
+				userID,
+				username,
 			}}
 		>
 			{children}
