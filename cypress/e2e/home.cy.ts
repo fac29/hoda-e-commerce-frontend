@@ -29,16 +29,41 @@ describe('home page', () => {
 	});
 
 	it('should navigate to product detail page', () => {
-		cy.get('.product-card').first().find('.product-button').click();
+		cy.get('.product-card')
+			.first()
+			.within(() => {
+				cy.get('.product-button').click();
+			});
 		// cy.url().should('include', '/products/1');
 		// cy.get('.product-name').should('be.visible');
 	});
 
 	it('should add a product to the cart', () => {
+		let productName;
+
 		cy.get('.product-card')
 			.first()
 			.within(() => {
 				cy.get('.plus-minus-button').click();
+
+				// Use .invoke('text') to get the text content and assign it to productName
+				cy.get('.product-name')
+					.invoke('text')
+					.then((text) => {
+						productName = text.trim();
+					});
+			});
+
+		// Navigate to the cart and assert correct location
+		cy.get('.nav-right button').contains('Cart').click();
+		cy.get('h2').contains('Cart Items');
+		cy.get('ul li').should('be.visible');
+
+		// Assert that the product added to the cart matches the captured product name
+		cy.get('ul li')
+			.first()
+			.within(() => {
+				cy.get('p').should('contain', productName);
 			});
 	});
 });
