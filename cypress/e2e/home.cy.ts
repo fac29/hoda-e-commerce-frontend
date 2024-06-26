@@ -28,7 +28,7 @@ describe('home page', () => {
 		});
 	});
 
-	it.only('should navigate to product detail page', () => {
+	it('should navigate to product detail page', () => {
 		cy.get('.product-card')
 			.first()
 			.within(() => {
