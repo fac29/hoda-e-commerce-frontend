@@ -24,6 +24,7 @@ export interface CartContextType {
 	total?: number;
 	addToCart: (item: CartItem) => void;
 	removeFromCart: (id: number) => void;
+	resetCart: () => void;
 	cartQuantity?: number;
 	handleAddToCart: (productId: number) => void;
 	handleRemoveFromCart: (productId: number) => void;
@@ -134,6 +135,10 @@ export function ShoppingCartProvider({ children }: CartProviderProps) {
 		}
 	}
 
+	const resetCart = () => {
+		setCart([]);
+	};
+
 	async function handleLoggedIn(login: boolean) {
 		setLoggedIn(login);
 		if (login) {
@@ -154,6 +159,7 @@ export function ShoppingCartProvider({ children }: CartProviderProps) {
 				cart,
 				addToCart,
 				removeFromCart,
+				resetCart,
 				total,
 				cartQuantity,
 				handleAddToCart,
