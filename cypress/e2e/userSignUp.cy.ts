@@ -1,4 +1,4 @@
-describe('user actions', () => {
+describe('user Sign Up actions', () => {
 	beforeEach(() => {
 		cy.visit('/signup');
 	});
