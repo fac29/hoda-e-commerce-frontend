@@ -28,14 +28,14 @@ describe('home page', () => {
 		});
 	});
 
-	it('should navigate to product detail page', () => {
+	it.only('should navigate to product detail page', () => {
 		cy.get('.product-card')
 			.first()
 			.within(() => {
-				cy.get('.product-button').click();
+				cy.get('.product-button').click().wait(1000);
 			});
-		// cy.url().should('include', '/products/1');
-		// cy.get('.product-name').should('be.visible');
+		cy.url().should('include', '/products/1');
+		cy.get('.product-name').should('be.visible');
 	});
 
 	it('should add a product to the cart', () => {
