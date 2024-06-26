@@ -17,6 +17,7 @@ function ShoppingCart() {
 		handleAddToCart,
 		loggedIn,
 		userID,
+		updateOrder,
 	} = useCart();
 
 	function handleBack() {
@@ -48,6 +49,9 @@ function ShoppingCart() {
 			if (response.ok) {
 				const data = await response.json();
 				console.log('Order successful:', data);
+				if (data.user_id === userID) {
+					updateOrder(data);
+				}
 				navigate('/checkout');
 				resetCart();
 			} else {
