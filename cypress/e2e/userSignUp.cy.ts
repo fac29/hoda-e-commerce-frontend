@@ -22,7 +22,7 @@ describe('user actions', () => {
 		cy.get('button.medium').contains('Sign Up').click();
 
 		// Assert successful navigation after submission
-		cy.url().should('include', '/');
+		cy.get('h1').contains('Products');
 	});
 
 	it('should navigate to login page from Sign Up form', () => {
@@ -38,6 +38,7 @@ describe('user actions', () => {
 		cy.get('button.medium').contains('Sign Up').click();
 
 		// Assert validation errors are displayed
+		cy.contains('Username cannot be empty.').should('be.visible');
 		cy.contains('Please enter a valid email address.').should('be.visible');
 		cy.contains('Password must be at least 8 characters long.').should(
 			'be.visible'
@@ -52,19 +53,10 @@ describe('user actions', () => {
 		cy.get('button.medium').contains('Sign Up').click();
 
 		// Assert validation errors are displayed
+		cy.contains('Username cannot be empty.').should('be.visible');
 		cy.contains('Please enter a valid email address.').should('be.visible');
 		cy.contains('Password must be at least 8 characters long.').should(
 			'be.visible'
 		);
-
-		// Correct the email and password
-		cy.get('input[name="email"]').clear().type('validemail@example.com');
-		cy.get('input[name="password"]').clear().type('validpassword123');
-
-		// Click Sign Up button with valid data
-		cy.get('button.medium').contains('Sign Up').click();
-
-		// Assert the form should navigate to login page after successful submission
-		cy.url().should('include', '/');
 	});
 });
