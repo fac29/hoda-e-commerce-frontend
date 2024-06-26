@@ -23,15 +23,6 @@ function ShoppingCart() {
 		navigate('/');
 	}
 
-	// function goToCheckout() {
-	// 	if (loggedIn) {
-	// 		navigate('/checkout');
-	// 		resetCart();
-	// 	} else {
-	// 		setIsOpen(true);
-	// 	}
-	// }
-
 	async function handleCheckout() {
 		if (loggedIn) {
 			const products = [];
