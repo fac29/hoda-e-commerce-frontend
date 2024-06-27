@@ -26,13 +26,13 @@ function SignUpForm() {
 	const validateForm = () => {
 		const newErrors: { username?: string; email?: string; password?: string } =
 			{};
-		if (!validateUsername(username)) {
+		if (validateUsername(username)) {
 			newErrors.username = 'Username cannot be empty.';
 		}
-		if (!validateEmail(email)) {
+		if (validateEmail(email)) {
 			newErrors.email = 'Please enter a valid email address.';
 		}
-		if (!validatePassword(password)) {
+		if (validatePassword(password)) {
 			newErrors.password = 'Password must be at least 8 characters long.';
 		}
 		setErrors(newErrors);
@@ -42,32 +42,29 @@ function SignUpForm() {
 	async function handleSignUp(event: FormEvent) {
 		event.preventDefault();
 
-		if (!validateForm()) {
-			return;
-		}
+		if (validateForm()) {
+			const response = await fetch(`${requestUrl}/sign-up`, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({ username, email, password }),
+				credentials: 'include',
+			});
 
-		const response = await fetch(`${requestUrl}/sign-up`, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({ username, email, password }),
-			credentials: 'include',
-		});
-
-		if (response.ok) {
-			const data = await response.json();
-			// Test log to see the response after sign up attempt
-			console.log('Sign up successful:', data);
-			handleLoggedIn(true);
-			navigate('/');
-		} else {
-			const errorData = await response.json();
-			// Test log to see the response after sign up attempt
-			console.error('Sign up failed:', errorData);
+			if (response.ok) {
+				const data = await response.json();
+				// Test log to see the response after sign up attempt
+				console.log('Sign up successful:', data);
+				handleLoggedIn(true);
+				navigate('/');
+			} else {
+				const errorData = await response.json();
+				// Test log to see the response after sign up attempt
+				console.error('Sign up failed:', errorData);
+			}
 		}
 	}
-
 	return (
 		<form onSubmit={handleSignUp} className='form'>
 			<div className='formField'>
@@ -83,7 +80,9 @@ function SignUpForm() {
 					value={username}
 					onChange={(e) => setUsername(e.target.value)}
 				/>
-				<div className='errorMsg' >{errors.username && <span className='error'>{errors.username}</span>}</div>
+				<div className='errorMsg'>
+					{errors.username && <span className='error'>{errors.username}</span>}
+				</div>
 			</div>
 			<div className='formField'>
 				<label className='formLabel' htmlFor='email'>
@@ -98,7 +97,9 @@ function SignUpForm() {
 					value={email}
 					onChange={(e) => setEmail(e.target.value)}
 				/>
-				<div className='errorMsg' >{errors.email && <span className='error'>{errors.email}</span>}</div>
+				<div className='errorMsg'>
+					{errors.email && <span className='error'>{errors.email}</span>}
+				</div>
 			</div>
 			<div className='formField'>
 				<label className='formLabel' htmlFor='password'>
@@ -113,7 +114,9 @@ function SignUpForm() {
 					value={password}
 					onChange={(e) => setPassword(e.target.value)}
 				/>
-					<div className='errorMsg' >{errors.email && <span className='error'>{errors.email}</span>}</div>
+				<div className='errorMsg'>
+					{errors.email && <span className='error'>{errors.email}</span>}
+				</div>
 			</div>
 			<Button buttonText='Sign Up' size='medium'></Button>
 			<a className='formLink' href='/login'>
