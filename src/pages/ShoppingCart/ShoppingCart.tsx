@@ -78,13 +78,12 @@ function ShoppingCart() {
 										buttonText='-'
 										buttonClick={() => handleRemoveFromCart(item.product_id)}
 									/>
+									<p>{item.quantity}</p>
 									<PlusMinusButton
 										buttonText='+'
 										buttonClick={() => handleAddToCart(item.product_id)}
 									/>
 								</div>
-
-								<p>{item.quantity}</p>
 								<p>£{(item.price * item.quantity) / 100}</p>
 							</li>
 						</div>
