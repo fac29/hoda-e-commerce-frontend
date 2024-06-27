@@ -39,14 +39,14 @@ describe('home page', () => {
 	});
 
 	it('should add a product to the cart', () => {
-		let productName;
+		let productName: string | undefined;
 
 		cy.get('.product-card')
 			.first()
 			.within(() => {
 				cy.get('.plus-minus-button').click();
 
-				// Use .invoke('text') to get the text content and assign it to productName
+				// Get the text content and assign it to productName
 				cy.get('.product-name')
 					.invoke('text')
 					.then((text) => {
