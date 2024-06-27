@@ -1,9 +1,12 @@
-import { useState, FormEvent } from 'react';
+import React, { useState, FormEvent } from 'react';
 import './LoginForm.css';
 import Button from '../Button/Button';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../../ShoppingCartContext';
-
+import {
+	validateEmail,
+	validatePassword,
+} from '../../utils/validation/validationRules';
 
 const requestUrl = import.meta.env.VITE_REQUEST_URL;
 
@@ -14,14 +17,8 @@ function LoginForm() {
 		{}
 	);
 
-	const validateEmail = (email: string) => {
-		const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-		return re.test(String(email).toLowerCase());
-	};
-
-	const validatePassword = (password: string) => {
-		return password.length >= 8;
-	};
+	const navigate = useNavigate();
+	const { handleLoggedIn } = useCart();
 
 	const validateForm = () => {
 		const newErrors: { email?: string; password?: string } = {};
@@ -35,39 +32,34 @@ function LoginForm() {
 		return Object.keys(newErrors).length === 0;
 	};
 
-	const navigate = useNavigate();
-	const { handleLoggedIn } = useCart();
-
-	async function handleLogin(event: FormEvent) {
+	const handleLogin = async (event: FormEvent) => {
 		event.preventDefault();
-		if (!validateForm()) {
-			return;
-		}
 
-		const response = await fetch(`${requestUrl}/login`, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({ email, password }),
-			credentials: 'include',
-		});
+		if (validateForm()) {
+			const response = await fetch(`${requestUrl}/login`, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({ email, password }),
+				credentials: 'include',
+			});
 
-		if (response.ok) {
-			const data = await response.json();
-			console.log('Login successful:', data);
-			handleLoggedIn(true);
-			navigate('/');
-		} else {
-			const errorData = await response.json();
-			console.error('Login failed:', errorData);
+			if (response.ok) {
+				const data = await response.json();
+				console.log('Login successful:', data);
+				handleLoggedIn(true);
+				navigate('/');
+			} else {
+				const errorData = await response.json();
+				console.error('Login failed:', errorData);
+			}
 		}
-	}
+	};
 
 	return (
 		<form onSubmit={handleLogin} className='form'>
 			<div className='formField'>
-				{' '}
 				<label className='formLabel' htmlFor='email'>
 					Email Address
 				</label>
