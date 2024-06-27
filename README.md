@@ -24,6 +24,12 @@ cd hoda-e-commerce-frontend
 npm install
 ```
 
+4. Create a .env file ``` touch .env ``` and include the following line:
+```
+VITE_REQUEST_URL = "http://localhost:3000"
+```
+
+
 4. Enter the following script to run the server in the development mode.
 
 ```bash
@@ -43,4 +49,16 @@ Prettier should be installed with other packages upon initialisation and utilise
 
 ## Testing
 
-TBC
+This project utilises automated frontend testing using Cypress.
+
+To run tests use:
+
+``` 
+npm run cy:run
+```
+
+To open Cypress use:
+
+```
+npm run cy:open
+```
