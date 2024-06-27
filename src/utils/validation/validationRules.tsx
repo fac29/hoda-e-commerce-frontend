@@ -15,6 +15,13 @@ export function validatePassword(value:string){
   
 
 
+export const validateUsername = (username: string) => {
+	if( username !== ''){
+		return  undefined
+	}
+	return 'please enter a valid username, it cannot be empty';
+};
+
 
 
 

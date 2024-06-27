@@ -1,26 +1,29 @@
 .form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    row-gap: 1rem;
-    
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	row-gap: 1rem;
 }
 
 .formField {
-    display: flex;
-    flex-direction: column;
-    align-items: left;
+	display: flex;
+	flex-direction: column;
+	align-items: left;
 }
 
 .formLabel {
-    margin-bottom: 0.5rem;
-    text-align: left;
+	margin-bottom: 0.5rem;
+	text-align: left;
 }
 
 .formInput {
-    padding: 0.5rem;
+	padding: 0.5rem;
 }
 
 .formLink {
-    text-decoration: none;
+	text-decoration: none;
+}
+
+.errorMsg {
+	color: red;
 }

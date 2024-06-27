@@ -72,7 +72,7 @@ function LoginForm() {
 					value={email}
 					onChange={(e) => setEmail(e.target.value)}
 				/>
-				{errors.email && <span className='error'>{errors.email}</span>}
+				<div className='errorMsg' >{errors.email && <span className='error'>{errors.email}</span>}</div>
 			</div>
 			<div className='formField'>
 				<label className='formLabel' htmlFor='password'>
@@ -87,7 +87,7 @@ function LoginForm() {
 					value={password}
 					onChange={(e) => setPassword(e.target.value)}
 				/>
-				{errors.password && <span className='error'>{errors.password}</span>}
+	<div className='errorMsg' >{errors.email && <span className='error'>{errors.email}</span>}</div>
 			</div>
 			<Button buttonText='Login' size='medium'></Button>
 			<a className='formLink' href='/signup'>

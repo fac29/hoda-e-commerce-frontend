@@ -3,7 +3,11 @@ import './SignUpForm.css';
 import Button from '../Button/Button';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../../ShoppingCartContext';
-
+import {
+	validateUsername,
+	validateEmail,
+	validatePassword,
+} from '../../utils/validation/validationRules';
 
 const requestUrl = import.meta.env.VITE_REQUEST_URL;
 
@@ -18,19 +22,6 @@ function SignUpForm() {
 	}>({});
 	const { handleLoggedIn } = useCart();
 	const navigate = useNavigate();
-
-	const validateEmail = (email: string) => {
-		const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-		return re.test(String(email).toLowerCase());
-	};
-
-	const validatePassword = (password: string) => {
-		return password.length >= 8;
-	};
-
-	const validateUsername = (username: string) => {
-		return username.trim() !== '';
-	};
 
 	const validateForm = () => {
 		const newErrors: { username?: string; email?: string; password?: string } =
@@ -92,7 +83,7 @@ function SignUpForm() {
 					value={username}
 					onChange={(e) => setUsername(e.target.value)}
 				/>
-				{errors.username && <span className='error'>{errors.username}</span>}
+				<div className='errorMsg' >{errors.username && <span className='error'>{errors.username}</span>}</div>
 			</div>
 			<div className='formField'>
 				<label className='formLabel' htmlFor='email'>
@@ -107,7 +98,7 @@ function SignUpForm() {
 					value={email}
 					onChange={(e) => setEmail(e.target.value)}
 				/>
-				{errors.email && <span className='error'>{errors.email}</span>}
+				<div className='errorMsg' >{errors.email && <span className='error'>{errors.email}</span>}</div>
 			</div>
 			<div className='formField'>
 				<label className='formLabel' htmlFor='password'>
@@ -122,7 +113,7 @@ function SignUpForm() {
 					value={password}
 					onChange={(e) => setPassword(e.target.value)}
 				/>
-				{errors.password && <span className='error'>{errors.password}</span>}
+					<div className='errorMsg' >{errors.email && <span className='error'>{errors.email}</span>}</div>
 			</div>
 			<Button buttonText='Sign Up' size='medium'></Button>
 			<a className='formLink' href='/login'>
