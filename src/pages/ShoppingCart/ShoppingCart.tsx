@@ -1,5 +1,5 @@
+import './ShoppingCart.css';
 import { useNavigate } from 'react-router-dom';
-
 import { useCart } from '../../ShoppingCartContext';
 import PlusMinusButton from '../../components/PlusMinusButton/PlusMinusButton';
 import { Modal } from '../../components/Modal/Modal';
@@ -64,26 +64,29 @@ function ShoppingCart() {
 	}
 
 	return (
-		<div>
+		<div className='cart-container'>
 			<h2>Cart Items</h2>
 			<button onClick={handleBack}>Back to Products</button>
 			<ul>
 				{cart.length ? (
 					cart.map((item) => (
-						<li key={item.product_id}>
-							<p>{item.product_name}</p>
-							<PlusMinusButton
-								buttonText='-'
-								buttonClick={() => handleRemoveFromCart(item.product_id)}
-							/>
-							<PlusMinusButton
-								buttonText='+'
-								buttonClick={() => handleAddToCart(item.product_id)}
-							/>
-
-							<p>{item.quantity}</p>
-							<p>£{(item.price * item.quantity) / 100}</p>
-						</li>
+						<div className='cart-item'>
+							<li key={item.product_id}>
+								<p>{item.product_name}</p>
+								<div className='cart-section'>
+									<PlusMinusButton
+										buttonText='-'
+										buttonClick={() => handleRemoveFromCart(item.product_id)}
+									/>
+									<p>{item.quantity}</p>
+									<PlusMinusButton
+										buttonText='+'
+										buttonClick={() => handleAddToCart(item.product_id)}
+									/>
+								</div>
+								<p>£{(item.price * item.quantity) / 100}</p>
+							</li>
+						</div>
 					))
 				) : (
 					<h2>You don't have any items in your cart!</h2>
