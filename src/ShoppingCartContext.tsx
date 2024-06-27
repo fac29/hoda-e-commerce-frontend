@@ -10,7 +10,7 @@ import { fetchProductByID } from './utils/fetchData/fetchData';
 import { fetchSessionById } from './utils/fetchSession/fetchSession';
 import { fetchUserByID } from './utils/fetchUser/fetchUser';
 import type User from './utils/dataTypes/user';
-// import type Session from './utils/dataTypes/session';
+import type OrderDetails from './utils/dataTypes/order';
 
 export interface CartItem {
 	product_id: number;
@@ -24,6 +24,7 @@ export interface CartContextType {
 	total?: number;
 	addToCart: (item: CartItem) => void;
 	removeFromCart: (id: number) => void;
+	resetCart: () => void;
 	cartQuantity?: number;
 	handleAddToCart: (productId: number) => void;
 	handleRemoveFromCart: (productId: number) => void;
@@ -31,6 +32,8 @@ export interface CartContextType {
 	handleLoggedIn: (login: boolean) => void;
 	username: string;
 	userID: number;
+	order: OrderDetails;
+	updateOrder: (order: OrderDetails) => void;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -54,6 +57,11 @@ export function ShoppingCartProvider({ children }: CartProviderProps) {
 	const [loggedIn, setLoggedIn] = useState(false);
 	const [username, setUsername] = useState('');
 	const [userID, setUserID] = useState(0);
+	const [order, setOrder] = useState<OrderDetails>({
+		userID: 0,
+		orderID: 0,
+		products: [],
+	});
 
 	useEffect(() => {
 		// Calculate the total whenever the cart changes
@@ -134,6 +142,10 @@ export function ShoppingCartProvider({ children }: CartProviderProps) {
 		}
 	}
 
+	const resetCart = () => {
+		setCart([]);
+	};
+
 	async function handleLoggedIn(login: boolean) {
 		setLoggedIn(login);
 		if (login) {
@@ -148,12 +160,17 @@ export function ShoppingCartProvider({ children }: CartProviderProps) {
 		}
 	}
 
+	const updateOrder = (newOrder: OrderDetails) => {
+		setOrder(newOrder);
+	};
+
 	return (
 		<CartContext.Provider
 			value={{
 				cart,
 				addToCart,
 				removeFromCart,
+				resetCart,
 				total,
 				cartQuantity,
 				handleAddToCart,
@@ -162,6 +179,8 @@ export function ShoppingCartProvider({ children }: CartProviderProps) {
 				handleLoggedIn,
 				userID,
 				username,
+				order,
+				updateOrder,
 			}}
 		>
 			{children}
