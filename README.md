@@ -43,4 +43,16 @@ Prettier should be installed with other packages upon initialisation and utilise
 
 ## Testing
 
-TBC
+This project utilises automated frontend testing using Cypress.
+
+To run tests use:
+
+``` 
+npm run cy:run
+```
+
+To open Cypress use:
+
+```
+npm run cy:open
+```
